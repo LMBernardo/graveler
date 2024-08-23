@@ -8,10 +8,10 @@ This applications uses the C++ `subtract_with_carry_engine` PNRG for speed, samp
 
 ## Building
 ### Linux
-Run `g++ ./graveler.cpp -o graveler`
+Run `g++ -O3 ./graveler.cpp -o graveler`
 
 ### Windows
-Run `g++.exe ./graveler.cpp -o graveler.exe`
+Run `g++.exe -O3 ./graveler.cpp -o graveler.exe`
 
 ## Running
 Build as above, then run either `./graveler` or `./graveler.exe`.
