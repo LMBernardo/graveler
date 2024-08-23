@@ -5,27 +5,27 @@
 using namespace std::chrono;
 
 int main(int argc, char *argv[]){
-    uint32_t numberOfRuns = 1000000000;
-    if (argc > 1){
-        numberOfRuns = std::stoi(argv[1]);
-    }
+    const uint_fast32_t numberOfRuns =
+            (argc > 1) ? std::stoi(argv[1]) : 1000000000;
 
-    // Setup pnrg
+    // Setup prng
     std::random_device seed;
     std::subtract_with_carry_engine<uint_fast32_t, 24, 10, 24> generator(seed());
     std::uniform_int_distribution<> d4(1, 4);
     
     // Roll and count ones
-    std::cout << "\nDoing 231 dice rolls " << numberOfRuns << " times...\n";
+    std::cout << "\nDoing "<< numberOfRuns << " runs with 231 dice rolls per run...\n";
 
     const auto before = high_resolution_clock::now();
     uint_fast32_t maxOnes = 0;
+    uint_fast32_t currentOnes = 0;
     uint_fast32_t currentRun = 0;
-    uint_fast32_t ones = 0;
     while (maxOnes < 177 && currentRun < numberOfRuns){
-        for (int i = 0; i < 231; ++i) if (d4(generator) == 1) ++ones;
-        maxOnes = std::max(ones, maxOnes);
-        ones = 0;
+        for (int i = 0; i < 231; ++i){
+            if (d4(generator) == 1) ++currentOnes;
+        }
+        maxOnes = std::max(currentOnes, maxOnes);
+        currentOnes = 0;
         ++currentRun;
     };
     const auto after = high_resolution_clock::now();
