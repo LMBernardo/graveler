@@ -1,2 +1,21 @@
 # graveler
 C++ Code for ShoddyCast's Graveler Challenge
+https://www.youtube.com/watch?v=M8C8dHQE2Ro
+
+Simulates 231 rolls of a D4 die N times, where N is one billion by default.
+The default can be overriden via the command-line.
+
+This applications uses the C++ `subtract_with_carry_engine` PNRG for speed, sampling with `uniform_int_distribution` to emulate a fair D4.
+
+## Building
+### Linux
+Run `g++ ./graveler.cpp -o graveler`
+
+### Windows
+Run `g++.exe ./graveler.cpp -o graveler.exe`
+
+## Running
+Build as above, then run either `./graveler` or `./graveler.exe`.
+
+The program defaults to a billion runs, but also accepts a single command-line argument to override the default.
+E.g., `./graveler 1000` to perform a thousand runs
