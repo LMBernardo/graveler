@@ -43,8 +43,8 @@ int main(int argc, char *argv[]){
               << numSeconds.count() << "."
               << numMillis.count() << " seconds.\n\n";
 
-    std::cout << "Number Of Runs: " << numberOfRuns << "\n";
-    std::cout << "Number Of Rolls: " << (numberOfRuns*231) << "\n";
+    std::cout << "Number Of Runs: " << currentRun << "\n";
+    std::cout << "Number Of Rolls: " << (currentRun*231) << "\n";
     std::cout << "Highest Ones Rolled: " << maxOnes << "\n\n";
 
     return 0;
