@@ -32,12 +32,13 @@ struct TimedFunctionResult {
     ReturnType res;
     Duration duration;
 };
-
 template <typename ReturnType,
+          typename TimedFunction,
+          typename ...Args,
           typename = std::enable_if<!std::is_void_v<ReturnType>>>
-TimedFunctionResult<ReturnType> timeFn(const std::function<ReturnType(void)>& fn){
+TimedFunctionResult<ReturnType> timeFn(TimedFunction&& fn, Args&... args){
     const auto before = high_resolution_clock::now();
-    ReturnType fnRes = fn();
+    ReturnType fnRes = std::forward<TimedFunction>(fn)(std::forward<Args>(args)...);
     const auto after = high_resolution_clock::now();
 
     return TimedFunctionResult<ReturnType>{
@@ -82,12 +83,11 @@ int main(int argc, char *argv[]){
     
     // Roll and count ones
     std::cout << "\nDoing "<< numberOfRuns << " runs with 231 dice rolls per run...\n";
-    
-    const auto fn = [numberOfRuns, &d4, &engine]() { return do_real_rolls(numberOfRuns, d4, engine); };
-    const auto timed = timeFn<RollResults>(fn);
+    // const auto timed = timeFn<RollResults>(do_real_rolls<decltype(d4)&, decltype(engine)&>, numberOfRuns, d4, engine);
+    const auto fn = [](auto numberOfRuns, auto d4, auto engine){ return do_real_rolls(numberOfRuns, d4, engine); };
+    const auto timed = timeFn<RollResults>(fn, numberOfRuns, d4, engine);
     const auto res = timed.res;
     const auto duration = timed.duration;
-
 
     std::cout << "\nDone. Took "
               << duration.hour.count() << " hours, "
