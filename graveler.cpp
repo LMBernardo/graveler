@@ -36,7 +36,7 @@ template <typename ReturnType,
           typename TimedFunction,
           typename ...Args,
           typename = std::enable_if<!std::is_void_v<ReturnType>>>
-TimedFunctionResult<ReturnType> timeFn(TimedFunction&& fn, Args&... args){
+TimedFunctionResult<ReturnType> timeFn(TimedFunction&& fn, Args&&... args){
     const auto before = high_resolution_clock::now();
     ReturnType fnRes = std::forward<TimedFunction>(fn)(std::forward<Args>(args)...);
     const auto after = high_resolution_clock::now();
