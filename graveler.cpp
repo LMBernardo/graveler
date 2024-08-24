@@ -32,6 +32,7 @@ struct TimedFunctionResult {
     ReturnType res;
     Duration duration;
 };
+
 template <typename ReturnType,
           typename TimedFunction,
           typename ...Args,
