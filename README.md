@@ -4,7 +4,7 @@ C++ Code for [ShoddyCast's Graveler Challenge](https://www.youtube.com/watch?v=M
 Simulates 231 rolls of a D4 die N times, where N is one billion by default.
 The default can be overriden via the command-line.
 
-This applications uses the C++ `subtract_with_carry_engine` PRNG for speed, sampling with `uniform_int_distribution` to emulate a fair D4.
+This application uses the C++ `subtract_with_carry_engine` PRNG for speed, sampling with `uniform_int_distribution` to emulate a fair D4.
 
 ## Binaries
 Binaries are provided for 64-bit Linux and Windows under [Releases](https://github.com/LMBernardo/graveler/releases).
